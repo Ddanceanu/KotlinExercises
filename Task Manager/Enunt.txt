@@ -1,0 +1,8 @@
+Creează o aplicație console pentru gestionarea task-urilor. Fiecare task trebuie să aibă un ID unic, titlu, descriere, dată limită, prioritate și un status (de exemplu: "în așteptare", "în desfășurare", "finalizat").
+Funcționalități necesare:
+Adăugarea unui task nou.
+Editarea unui task existent (cu actualizarea oricărui atribut).
+Ștergerea unui task.
+Filtrarea și sortarea task-urilor după diferite criterii (de exemplu, după prioritate sau dată limită).
+Persistența task-urilor folosind un fișier local sau baze de date in-memory.
+Folosește colecții Kotlin, lambda, funcții extinse și clase seale pentru modelarea statusurilor.
