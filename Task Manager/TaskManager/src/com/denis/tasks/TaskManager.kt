@@ -22,4 +22,6 @@ class TaskManager {
             println("----------------------------------")
         }
     }
+
+    fun deleteTask(id: Int): Boolean = tasksList.removeIf { task -> task.id == id }
 }
