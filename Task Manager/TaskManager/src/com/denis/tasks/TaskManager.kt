@@ -1,7 +1,7 @@
 package com.denis.tasks
 
 class TaskManager {
-    private val tasksList = ArrayList<Task>()
+    private var tasksList = ArrayList<Task>()
     var nextId = 1
 
     fun addTask(task: Task) {
@@ -36,7 +36,24 @@ class TaskManager {
                 "dueDate" -> task.addDate()
                 "priority" -> task.addPriority()
                 "status" -> task.modifyStatus()
-                else -> throw IllegalArgumentException("Invalid field: $field")
+                else -> println("Camp invalid.")
+            }
+        }
+    }
+
+    fun filterBy(field: String) {
+        when (field.lowercase()) {
+            "priority" -> {
+                var newList = tasksList
+                tasksList.sortByDescending { task -> task.priority }
+                printTasks()
+                tasksList = newList
+            }
+            "status" -> {
+                var newList = tasksList
+                tasksList.sortBy { task -> task.status }
+                printTasks()
+                tasksList = newList
             }
         }
     }
