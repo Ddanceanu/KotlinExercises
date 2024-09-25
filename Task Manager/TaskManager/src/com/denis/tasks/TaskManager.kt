@@ -10,4 +10,16 @@ class TaskManager {
     }
 
     fun getTasks(): List<Task> = tasksList
+
+    fun printTasks() {
+        for (task in tasksList) {
+            println("----------- Task ID: ${task.id} ----------- ")
+            println("Title:        ${task.title}")
+            println("Description:  ${task.description}")
+            println("Due Date:     ${task.dueDate}")
+            println("Priority:     ${task.priority}")
+            println("Status:       ${task.status}")
+            println("----------------------------------")
+        }
+    }
 }

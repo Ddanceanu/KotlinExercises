@@ -1,3 +1,5 @@
+import com.denis.tasks.Priority
+import com.denis.tasks.Status
 import com.denis.tasks.Task
 import com.denis.tasks.TaskManager
 
@@ -11,16 +13,26 @@ fun main() {
         when (input) {
             "add" -> {
                 print("Task name: ")
-                val name = readLine() ?: ""
-                val newTask = Task(name)
-                taskManager.addTask(newTask)
-            }
-            "list" -> {
-                val myTasksList = taskManager.getTasks()
-                for (i in myTasksList) {
-                    println("Task ID: ${i.id}, Title: ${i.title}")
+                var taskInput = readLine() ?: ""
+                val newTask = Task(taskInput)
+                print("Task Description: ")
+                taskInput = readLine() ?: ""
+                newTask.description = if (!taskInput.isBlank()) taskInput else "No description provided"
+                print("Due Date: ")
+                taskInput = readLine() ?: ""
+                newTask.dueDate = if (!taskInput.isBlank()) taskInput else "No date provided"
+                print("Priority (Low/Medium/High/Critical): ")
+                taskInput = readLine() ?: ""
+                try {
+                    newTask.priority = Priority.valueOf(taskInput.replaceFirstChar { it.uppercaseChar() })
+                } catch (e: IllegalArgumentException) {
+                    println("Incorrect argument! Converting into 'Low'")
+                    newTask.priority = Priority.Low
                 }
+                taskManager.addTask(newTask)
+                newTask.status = Status.PENDING
             }
+            "list" -> taskManager.printTasks()
             "exit" -> break
         }
     }
