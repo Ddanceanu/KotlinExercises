@@ -4,7 +4,7 @@ enum class Status(
     val description: String,
 ) {
     PENDING("Task is pending"),
-    IN_PROGRESS("Task is in progress"),
+    INPROGRESS("Task is in progress"),
     COMPLETED("Task is completed"),
     CANCELLED("Task is cancelled"),
     ;
@@ -53,5 +53,16 @@ data class Task(
 
     fun addStatus() {
         status = Status.PENDING
+    }
+
+    fun modifyStatus() {
+        print("Status (PENDING/IN_PROGRESS/COMPLETED/CANCELLED): ")
+        val input = readLine() ?: ""
+        try {
+            status = Status.valueOf(input.uppercase())
+        } catch (e: IllegalArgumentException) {
+            println("Incorrect argument! Converting into 'PENDING'")
+            status = Status.PENDING
+        }
     }
 }

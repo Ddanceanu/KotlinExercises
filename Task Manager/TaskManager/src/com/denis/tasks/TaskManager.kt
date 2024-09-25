@@ -24,4 +24,20 @@ class TaskManager {
     }
 
     fun deleteTask(id: Int): Boolean = tasksList.removeIf { task -> task.id == id }
+
+    fun editTask(
+        id: Int,
+        field: String,
+    ) {
+        val task = tasksList.find { task -> task.id == id }
+        if (task != null) {
+            when (field.lowercase()) {
+                "description" -> task.addDescription()
+                "dueDate" -> task.addDate()
+                "priority" -> task.addPriority()
+                "status" -> task.modifyStatus()
+                else -> throw IllegalArgumentException("Invalid field: $field")
+            }
+        }
+    }
 }

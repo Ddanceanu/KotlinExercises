@@ -4,7 +4,7 @@ import com.denis.tasks.TaskManager
 fun main() {
     println("Welcome to Task Manager")
     val taskManager = TaskManager()
-    println("Available commands: add, edit, print, delete, exit")
+    println("Available commands: add, edit, delete, exit")
     while (true) {
         print("Enter command: ")
         val input = readLine() ?: ""
@@ -23,19 +23,20 @@ fun main() {
             "list" -> taskManager.printTasks()
             "edit" -> {
                 println("Pentru a edita un task, ai nevoie de ID-ul acestuia. Il poti obtine folosind comanda \"list\".")
-                val input = readLine() ?: "".toInt()
+                val input = readLine() ?: ""
+                val taskId = input.toIntOrNull() ?: 0
 
                 if (input == "list") {
                     taskManager.printTasks()
-                    break
+                    continue
                 } else {
-                    if (input in 1..taskManager.nextId) {
+                    if (taskId in 1..taskManager.nextId) {
                         print("Ce camp doriti sa modificati? (Description/Date/Priority/Status): ")
                         val input = readLine() ?: ""
-                        TODO("URMEAZA CONTINUAREA")
+                        taskManager.editTask(taskId, input)
                     } else {
                         println("ID incorect.")
-                        break
+                        continue
                     }
                 }
             }
@@ -45,7 +46,7 @@ fun main() {
                 val taskId = input.toIntOrNull() ?: 0
                 if (input == "list") {
                     taskManager.printTasks()
-                    break
+                    continue
                 } else {
                     if (taskId in 1..taskManager.nextId) {
                         try {
