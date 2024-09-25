@@ -27,4 +27,31 @@ data class Task(
     var dueDate: String? = null
     var priority: Priority? = null
     var status: Status? = null
+
+    fun addDescription() {
+        print("Task Description: ")
+        val taskInput = readLine() ?: ""
+        description = if (!taskInput.isBlank()) taskInput else "No description provided"
+    }
+
+    fun addDate() {
+        print("Due Date: ")
+        val taskInput = readLine() ?: ""
+        dueDate = if (!taskInput.isBlank()) taskInput else "No date provided"
+    }
+
+    fun addPriority() {
+        print("Priority (Low/Medium/High/Critical): ")
+        val taskInput = readLine() ?: ""
+        try {
+            priority = Priority.valueOf(taskInput.replaceFirstChar { it.uppercaseChar() })
+        } catch (e: IllegalArgumentException) {
+            println("Incorrect argument! Converting into 'Low'")
+            priority = Priority.Low
+        }
+    }
+
+    fun addStatus() {
+        status = Status.PENDING
+    }
 }
