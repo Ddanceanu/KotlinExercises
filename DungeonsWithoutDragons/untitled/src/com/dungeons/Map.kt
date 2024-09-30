@@ -56,28 +56,35 @@ class Map(
                 player.playFight(map[playerPositionRow][playerPositionCol])
             }
             "HEALTH" -> {
-                if (player.healthPotions > 0) {
+                if (player.health == 100 && player.healthPotions > 0) {
+                    println("Your health is already 100%.\n")
+                } else if (player.healthPotions > 0) {
                     player.health = 100
                     player.healthPotions--
-                    println("Now you health is 100%.")
+                    println("Now you health is 100%.\n")
                 } else {
-                    println("You don't have any health potions.")
+                    println("You don't have any health potions.\n")
                 }
             }
             "ARMOUR" -> {
-                if (player.armourPotions > 0) {
+                if (player.armour == 100 && player.armourPotions > 0) {
+                    println("Your armour is already 100%.\n")
+                } else if (player.armourPotions > 0) {
                     player.armour += 25
                     player.armourPotions--
-                    println("Now your armour is ${player.armour}")
+                    if (player.armour > 100) {
+                        player.armour = 100
+                    }
+                    println("Now your armour is ${player.armour}%.\n")
                 } else {
-                    println("You don't have any armour potions.")
+                    println("You don't have any armour potions.\n")
                 }
             }
             "exit" -> {
                 player.gameStatus = false
             }
             else -> {
-                println("Unknown command.")
+                println("Unknown command.\n")
             }
         }
     }

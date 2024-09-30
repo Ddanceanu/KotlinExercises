@@ -1,30 +1,31 @@
 package com.dungeons
 
 abstract class Enemy {
+    abstract val name: String
     abstract var health: Int
     abstract var damage: Int
-
-    fun receiveDamage(receivedDamage: Int) {
-        this.health -= receivedDamage
-    }
 }
 
 class Skeleton : Enemy() {
+    override val name: String = "Skeleton"
     override var health: Int = 30
     override var damage: Int = 5
 }
 
 class Goblin : Enemy() {
+    override val name: String = "Goblin"
     override var health: Int = 50
     override var damage: Int = 7
 }
 
 class Orc : Enemy() {
+    override val name: String = "Orc"
     override var health: Int = 75
     override var damage: Int = 12
 }
 
 class Troll : Enemy() {
+    override val name: String = "Troll"
     override var health: Int = 125
     override var damage: Int = 20
 }

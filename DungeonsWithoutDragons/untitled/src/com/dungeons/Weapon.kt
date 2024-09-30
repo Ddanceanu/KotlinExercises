@@ -10,7 +10,7 @@ enum class Weapons(
 }
 
 class Weapon(
-    var currentWeapon: Weapons,
+    private var currentWeapon: Weapons,
 ) {
     fun weaponDamage() = currentWeapon.damage
 

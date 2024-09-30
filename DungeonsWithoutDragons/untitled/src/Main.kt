@@ -7,7 +7,7 @@ fun main() {
     val playerName = readLine() ?: "Anonymous"
     val player = Player(playerName)
     val gameMap = Map(player)
-    println("Hello, $playerName! You are now exploring the dungeon!")
+    println("Hello, $playerName! You are now exploring the dungeon!\n")
     while (player.gameStatus) {
         gameMap.displayNextMove()
         gameMap.readNextMove()
