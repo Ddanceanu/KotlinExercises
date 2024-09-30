@@ -16,15 +16,15 @@ class Skeleton : Enemy() {
 
 class Goblin : Enemy() {
     override var health: Int = 50
-    override var damage: Int = 10
+    override var damage: Int = 7
 }
 
 class Orc : Enemy() {
     override var health: Int = 75
-    override var damage: Int = 20
+    override var damage: Int = 12
 }
 
 class Troll : Enemy() {
     override var health: Int = 125
-    override var damage: Int = 30
+    override var damage: Int = 20
 }

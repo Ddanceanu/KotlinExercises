@@ -9,6 +9,22 @@ enum class Weapons(
     MACHINE_GUN(30),
 }
 
-class Weapon {
-    val currentWeapon = Weapons.FIST
+class Weapon(
+    var currentWeapon: Weapons,
+) {
+    fun weaponDamage() = currentWeapon.damage
+
+    fun getWeaponName(): String = currentWeapon.name
+
+    fun getRifle() {
+        currentWeapon = Weapons.RIFLE
+    }
+
+    fun getPistol() {
+        currentWeapon = Weapons.PISTOL
+    }
+
+    fun getMachineGun() {
+        currentWeapon = Weapons.MACHINE_GUN
+    }
 }

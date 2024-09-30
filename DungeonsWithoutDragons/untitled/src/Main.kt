@@ -8,7 +8,7 @@ fun main() {
     val player = Player(playerName)
     val gameMap = Map(player)
     println("Hello, $playerName! You are now exploring the dungeon!")
-    while (true) {
+    while (player.gameStatus) {
         gameMap.displayNextMove()
         gameMap.readNextMove()
     }
