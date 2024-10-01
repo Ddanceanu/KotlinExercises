@@ -1,20 +1,27 @@
 package com.dungeons
 
+import kotlin.random.Random
+
 class Map(
     private val player: Player,
+    val nonDeterministic: Boolean = false,
 ) {
     private val map: Array<Array<Int>> =
-        arrayOf(
-            arrayOf(0, 0, 0),
-            arrayOf(8, 5, 6),
-            arrayOf(3, 0, 1),
-            arrayOf(0, 2, 6),
-            arrayOf(6, 5, 0),
-            arrayOf(0, 8, 6),
-            arrayOf(0, 2, 5),
-            arrayOf(3, 10, 5),
-            arrayOf(4, 4, 4),
-        )
+        if (nonDeterministic == false) {
+            arrayOf(
+                arrayOf(0, 0, 0),
+                arrayOf(8, 5, 6),
+                arrayOf(3, 0, 1),
+                arrayOf(0, 2, 6),
+                arrayOf(6, 5, 0),
+                arrayOf(0, 8, 6),
+                arrayOf(0, 2, 5),
+                arrayOf(3, 10, 5),
+                arrayOf(4, 4, 4),
+            )
+        } else {
+            generateRandomMap()
+        }
 
     private var playerPositionRow = 0
     private var playerPositionCol = 1
@@ -86,6 +93,23 @@ class Map(
             else -> {
                 println("Unknown command.\n")
             }
+        }
+    }
+
+    fun generateRandomMap(): Array<Array<Int>> {
+        val rows = Random.nextInt(7, 15)
+        val firstRow = arrayOf(0, 0, 0)
+        val lastRow = arrayOf(4, 4, 4)
+        val middleRows =
+            Array(rows - 2) {
+                arrayOf(Random.nextInt(0, 11), Random.nextInt(0, 11), Random.nextInt(0, 11))
+            }
+        return arrayOf(firstRow, *middleRows, lastRow)
+    }
+
+    fun displayMap() {
+        map.forEach { rows ->
+            println(rows.joinToString(","))
         }
     }
 }

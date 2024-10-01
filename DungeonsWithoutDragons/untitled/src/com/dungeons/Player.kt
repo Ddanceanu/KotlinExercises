@@ -29,8 +29,12 @@ class Player(
                 while (health > 0 && enemy?.health!! > 0) {
                     println("Player health: $health, armour: $armour, your weapon: ${weapon.getWeaponName()}")
                     println("${enemy.name} health: ${enemy.health}")
-                    if (armour > 0) {
+                    if (armour > 0 && armour >= enemy.damage) {
                         armour -= enemy.damage
+                    } else if (armour > 0 && armour <= enemy.damage) {
+                        val rest = enemy.damage - armour
+                        armour = 0
+                        health -= rest
                     } else {
                         health -= enemy.damage
                     }
@@ -64,16 +68,29 @@ class Player(
                 )
                 armourPotions++
             }
+            7 -> {
+                println("You are in an empty room.\n")
+            }
             8 -> {
-                println("You found a pistol. Now this is your weapon.\n")
-                weapon.getPistol()
+                print("You found a pistol. ")
+                if (weapon.weaponDamage() < weapon.getPistolDamage()) {
+                    weapon.getPistol()
+                    print("Now this is your weapon.\n")
+                } else {
+                    print("Your current weapon (${weapon.getWeaponName()}) is better than a pistol. You can't replace it.\n")
+                }
             }
             9 -> {
-                println("You found a rifle. Now this is your weapon.\n")
-                weapon.getRifle()
+                print("You found a rifle. ")
+                if (weapon.weaponDamage() < weapon.getRifleDamage()) {
+                    weapon.getRifle()
+                    print("Now this is your weapon.\n")
+                } else {
+                    print("Your current weapon (${weapon.getWeaponName()}) is better than a rifle. You can't replace it.\n")
+                }
             }
             10 -> {
-                println("You found a machine_gun. Now this is your weapon.\n")
+                println("You found a MachineGun. Now this is your weapon.")
                 weapon.getMachineGun()
             }
         }

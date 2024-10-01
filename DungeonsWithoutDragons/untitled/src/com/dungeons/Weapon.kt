@@ -5,12 +5,12 @@ enum class Weapons(
 ) {
     FIST(5),
     PISTOL(10),
-    RIFLE(20),
-    MACHINE_GUN(30),
+    RIFLE(15),
+    MACHINE_GUN(25),
 }
 
 class Weapon(
-    private var currentWeapon: Weapons,
+    var currentWeapon: Weapons,
 ) {
     fun weaponDamage() = currentWeapon.damage
 
@@ -27,4 +27,10 @@ class Weapon(
     fun getMachineGun() {
         currentWeapon = Weapons.MACHINE_GUN
     }
+
+    fun getPistolDamage(): Int = Weapons.PISTOL.damage
+
+    fun getRifleDamage(): Int = Weapons.RIFLE.damage
+
+    fun getMachineGunDamage(): Int = Weapons.MACHINE_GUN.damage
 }

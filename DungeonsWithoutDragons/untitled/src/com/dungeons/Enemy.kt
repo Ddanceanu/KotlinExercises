@@ -14,18 +14,18 @@ class Skeleton : Enemy() {
 
 class Goblin : Enemy() {
     override val name: String = "Goblin"
-    override var health: Int = 50
+    override var health: Int = 40
     override var damage: Int = 7
 }
 
 class Orc : Enemy() {
     override val name: String = "Orc"
-    override var health: Int = 75
+    override var health: Int = 50
     override var damage: Int = 12
 }
 
 class Troll : Enemy() {
     override val name: String = "Troll"
-    override var health: Int = 125
+    override var health: Int = 100
     override var damage: Int = 20
 }
