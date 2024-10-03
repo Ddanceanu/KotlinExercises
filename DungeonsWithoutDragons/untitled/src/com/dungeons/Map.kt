@@ -4,10 +4,10 @@ import kotlin.random.Random
 
 class Map(
     private val player: Player,
-    val nonDeterministic: Boolean = false,
+    private val nonDeterministic: Boolean = false,
 ) {
     private val map: Array<Array<Int>> =
-        if (nonDeterministic == false) {
+        if (!nonDeterministic) {
             arrayOf(
                 arrayOf(0, 0, 0),
                 arrayOf(8, 5, 6),
@@ -46,21 +46,35 @@ class Map(
     }
 
     fun readNextMove() {
-        val userInput = (readLine() ?: "FRONT").uppercase()
+        val userInput = (readlnOrNull() ?: "FRONT").uppercase()
         when (userInput) {
             "FRONT" -> {
                 playerPositionRow++
                 player.playFight(map[playerPositionRow][playerPositionCol])
             }
             "LEFT" -> {
-                playerPositionCol--
-                playerPositionRow++
-                player.playFight(map[playerPositionRow][playerPositionCol])
+                try {
+                    if (playerPositionCol == 0) {
+                        throw ArrayIndexOutOfBoundsException("Invalid input")
+                    }
+                    playerPositionCol--
+                    playerPositionRow++
+                    player.playFight(map[playerPositionRow][playerPositionCol])
+                } catch (e: ArrayIndexOutOfBoundsException) {
+                    println("Invalid move. Please try again!")
+                }
             }
             "RIGHT" -> {
-                playerPositionCol++
-                playerPositionRow++
-                player.playFight(map[playerPositionRow][playerPositionCol])
+                try {
+                    if (playerPositionCol == 2) {
+                        throw ArrayIndexOutOfBoundsException("Invalid input")
+                    }
+                    playerPositionCol++
+                    playerPositionRow++
+                    player.playFight(map[playerPositionRow][playerPositionCol])
+                } catch (e: ArrayIndexOutOfBoundsException) {
+                    println("Invalid move. Please try again!")
+                }
             }
             "HEALTH" -> {
                 if (player.health == 100 && player.healthPotions > 0) {
@@ -96,13 +110,13 @@ class Map(
         }
     }
 
-    fun generateRandomMap(): Array<Array<Int>> {
-        val rows = Random.nextInt(7, 15)
+    private fun generateRandomMap(): Array<Array<Int>> {
+        val rows = Random.nextInt(7, 12)
         val firstRow = arrayOf(0, 0, 0)
         val lastRow = arrayOf(4, 4, 4)
         val middleRows =
             Array(rows - 2) {
-                arrayOf(Random.nextInt(0, 11), Random.nextInt(0, 11), Random.nextInt(0, 11))
+                arrayOf(generateRandomNumberWithoutTroll(), generateRandomNumberWithoutTroll(), generateRandomNumberWithoutTroll())
             }
         return arrayOf(firstRow, *middleRows, lastRow)
     }
@@ -110,6 +124,15 @@ class Map(
     fun displayMap() {
         map.forEach { rows ->
             println(rows.joinToString(","))
+        }
+    }
+
+    private fun generateRandomNumberWithoutTroll(): Int {
+        val num = Random.nextInt(0, 2)
+        return if (num == 0) {
+            Random.nextInt(0, 4)
+        } else {
+            Random.nextInt(5, 11)
         }
     }
 }

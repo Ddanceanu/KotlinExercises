@@ -20,12 +20,12 @@ class Goblin : Enemy() {
 
 class Orc : Enemy() {
     override val name: String = "Orc"
-    override var health: Int = 50
-    override var damage: Int = 12
+    override var health: Int = 55
+    override var damage: Int = 10
 }
 
 class Troll : Enemy() {
     override val name: String = "Troll"
-    override var health: Int = 100
+    override var health: Int = 99
     override var damage: Int = 20
 }

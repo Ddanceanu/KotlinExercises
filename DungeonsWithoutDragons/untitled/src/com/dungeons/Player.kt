@@ -50,7 +50,12 @@ class Player(
                     gameStatus = false
                     println("You have been killed by the ${enemy.name}. Good luck next time!")
                 } else {
-                    println("Congratulations! You killed the ${enemy.name}. Now you can move forward!\n")
+                    if (enemy is Troll) {
+                        println("Congratulations! You killed the ${enemy.name}. You finished the game and find the treasure.")
+                        gameStatus = false
+                    } else {
+                        ("Congratulations! You killed the ${enemy.name}. Now you can move forward!\n")
+                    }
                 }
             }
 
@@ -76,6 +81,8 @@ class Player(
                 if (weapon.weaponDamage() < weapon.getPistolDamage()) {
                     weapon.getPistol()
                     print("Now this is your weapon.\n")
+                } else if (weapon.weaponDamage() == weapon.getPistolDamage()) {
+                    println("You already have this weapon.")
                 } else {
                     print("Your current weapon (${weapon.getWeaponName()}) is better than a pistol. You can't replace it.\n")
                 }
@@ -85,13 +92,20 @@ class Player(
                 if (weapon.weaponDamage() < weapon.getRifleDamage()) {
                     weapon.getRifle()
                     print("Now this is your weapon.\n")
+                } else if (weapon.weaponDamage() == weapon.getRifleDamage()) {
+                    println("You already have this weapon.")
                 } else {
                     print("Your current weapon (${weapon.getWeaponName()}) is better than a rifle. You can't replace it.\n")
                 }
             }
             10 -> {
-                println("You found a MachineGun. Now this is your weapon.")
-                weapon.getMachineGun()
+                print("You found a MachineGun. ")
+                if (weapon.weaponDamage() == weapon.getMachineGunDamage()) {
+                    println("You already have this weapon.")
+                } else {
+                    weapon.getMachineGun()
+                    println("Now this is your weapon.")
+                }
             }
         }
     }
