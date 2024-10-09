@@ -14,7 +14,8 @@ fun main() {
         } else {
             Map(player, false)
         }
-    gameMap.displayMap()
+    // gameMap.displayMap()
+    gameMap.createHtmlTableFromMatrix(gameMap.map)
 
     println("Hello, $playerName! You are now exploring the dungeon!\n")
     while (player.gameStatus) {
